@@ -202,6 +202,7 @@
             justify-content: center;
             position: relative;
             min-height: 0;
+            perspective: 1000px;
         }
 
         .universo-container {
@@ -211,6 +212,7 @@
             opacity: 0;
             animation: universoEntrada 3s ease-out forwards;
             animation-delay: 2s;
+            transform-style: preserve-3d;
         }
 
         @keyframes universoEntrada {
@@ -232,13 +234,14 @@
             border-radius: 50%;
             background: radial-gradient(
                 circle at 30% 30%,
-                rgba(157, 78, 221, 0.3) 0%,
-                rgba(114, 9, 183, 0.2) 25%,
-                rgba(76, 201, 240, 0.15) 50%,
+                rgba(157, 78, 221, 0.4) 0%,
+                rgba(114, 9, 183, 0.25) 25%,
+                rgba(76, 201, 240, 0.2) 50%,
                 transparent 70%
             );
             filter: blur(40px);
             animation: nebulosaRotar 30s linear infinite;
+            box-shadow: inset 0 0 80px rgba(157, 78, 221, 0.2);
         }
 
         @keyframes nebulosaRotar {
@@ -256,23 +259,25 @@
             border-radius: 50%;
             background: radial-gradient(
                 circle at 70% 70%,
-                rgba(255, 105, 180, 0.25) 0%,
-                rgba(255, 179, 217, 0.15) 40%,
+                rgba(255, 105, 180, 0.35) 0%,
+                rgba(255, 179, 217, 0.2) 40%,
                 transparent 70%
             );
             filter: blur(30px);
             animation: nebulosaRotar 25s linear infinite reverse;
+            box-shadow: inset 0 0 60px rgba(255, 105, 180, 0.15);
         }
 
         /* Órbitas */
         .orbita {
             position: absolute;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1.5px solid rgba(255, 255, 255, 0.15);
             border-radius: 50%;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
             animation: orbitaGirar 20s linear infinite;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.05), inset 0 0 20px rgba(255, 255, 255, 0.02);
         }
 
         .orbita-1 {
@@ -314,26 +319,30 @@
                 #ffb300 100%
             );
             box-shadow: 
-                0 0 40px rgba(255, 215, 0, 0.6),
-                0 0 80px rgba(255, 215, 0, 0.4),
+                0 0 50px rgba(255, 215, 0, 0.9),
+                0 0 100px rgba(255, 215, 0, 0.6),
+                0 0 150px rgba(255, 180, 0, 0.4),
                 inset -10px -10px 30px rgba(0, 0, 0, 0.3);
             animation: planetaCentralLatir 3s ease-in-out infinite;
             z-index: 10;
+            filter: drop-shadow(0 0 30px rgba(255, 215, 0, 0.6));
         }
 
         @keyframes planetaCentralLatir {
             0%, 100% { 
                 transform: translate(-50%, -50%) scale(1);
                 box-shadow: 
-                    0 0 40px rgba(255, 215, 0, 0.6),
-                    0 0 80px rgba(255, 215, 0, 0.4),
+                    0 0 50px rgba(255, 215, 0, 0.9),
+                    0 0 100px rgba(255, 215, 0, 0.6),
+                    0 0 150px rgba(255, 180, 0, 0.4),
                     inset -10px -10px 30px rgba(0, 0, 0, 0.3);
             }
             50% { 
                 transform: translate(-50%, -50%) scale(1.05);
                 box-shadow: 
-                    0 0 60px rgba(255, 215, 0, 0.8),
-                    0 0 100px rgba(255, 215, 0, 0.5),
+                    0 0 70px rgba(255, 215, 0, 1),
+                    0 0 120px rgba(255, 215, 0, 0.7),
+                    0 0 170px rgba(255, 180, 0, 0.5),
                     inset -10px -10px 30px rgba(0, 0, 0, 0.3);
             }
         }
@@ -355,6 +364,11 @@
             position: absolute;
             border-radius: 50%;
             box-shadow: inset -5px -5px 15px rgba(0, 0, 0, 0.4);
+            transition: filter 0.3s ease;
+        }
+
+        .planeta:hover {
+            filter: drop-shadow(0 0 25px currentColor) brightness(1.3);
         }
 
         .planeta-1 {
@@ -365,9 +379,10 @@
             left: 50%;
             transform: translateX(-50%);
             box-shadow: 
-                0 0 20px rgba(255, 105, 180, 0.5),
+                0 0 30px rgba(255, 105, 180, 0.8),
                 inset -5px -5px 15px rgba(0, 0, 0, 0.4);
             animation: planeta1Orbitar 15s linear infinite;
+            filter: drop-shadow(0 0 10px rgba(255, 105, 180, 0.6));
         }
 
         @keyframes planeta1Orbitar {
@@ -387,9 +402,10 @@
             left: 0;
             transform: translateY(-50%);
             box-shadow: 
-                0 0 25px rgba(76, 201, 240, 0.5),
+                0 0 35px rgba(76, 201, 240, 0.8),
                 inset -5px -5px 15px rgba(0, 0, 0, 0.4);
             animation: planeta2Orbitar 25s linear infinite;
+            filter: drop-shadow(0 0 12px rgba(76, 201, 240, 0.6));
         }
 
         @keyframes planeta2Orbitar {
@@ -409,9 +425,10 @@
             right: 0;
             transform: translateY(-50%);
             box-shadow: 
-                0 0 20px rgba(157, 78, 221, 0.5),
+                0 0 28px rgba(157, 78, 221, 0.8),
                 inset -5px -5px 15px rgba(0, 0, 0, 0.4);
             animation: planeta3Orbitar 35s linear infinite;
+            filter: drop-shadow(0 0 10px rgba(157, 78, 221, 0.6));
         }
 
         @keyframes planeta3Orbitar {
@@ -431,9 +448,10 @@
             left: 50%;
             transform: translateX(-50%);
             box-shadow: 
-                0 0 22px rgba(255, 179, 217, 0.5),
+                0 0 32px rgba(255, 179, 217, 0.8),
                 inset -5px -5px 15px rgba(0, 0, 0, 0.4);
             animation: planeta4Orbitar 20s linear infinite;
+            filter: drop-shadow(0 0 11px rgba(255, 179, 217, 0.6));
         }
 
         @keyframes planeta4Orbitar {
@@ -566,33 +584,34 @@
            ============================================ */
         .particula-luz {
             position: fixed;
-            width: 3px;
-            height: 3px;
+            width: 4px;
+            height: 4px;
             background: var(--color-gold);
             border-radius: 50%;
             opacity: 0;
-            box-shadow: 0 0 10px currentColor;
-            animation: flotarLuz 6s ease-in-out infinite;
+            box-shadow: 0 0 15px currentColor, 0 0 8px rgba(255, 255, 255, 0.6);
+            animation: flotarLuz 7s ease-in-out infinite;
             pointer-events: none;
             will-change: transform, opacity;
+            filter: drop-shadow(0 0 8px currentColor);
         }
 
         @keyframes flotarLuz {
             0% {
                 opacity: 0;
-                transform: translateY(0) scale(0);
+                transform: translateY(0) translateX(0) scale(0);
             }
             25% {
-                opacity: 0.8;
-                transform: translateY(-30px) scale(1);
+                opacity: 1;
+                transform: translateY(-30px) translateX(var(--tx, -20px)) scale(1);
             }
             75% {
-                opacity: 0.8;
-                transform: translateY(-70px) scale(1);
+                opacity: 0.9;
+                transform: translateY(-70px) translateX(var(--tx, -20px)) scale(1);
             }
             100% {
                 opacity: 0;
-                transform: translateY(-100px) scale(0);
+                transform: translateY(-100px) translateX(var(--tx, -20px)) scale(0);
             }
         }
 
@@ -738,6 +757,22 @@
             outline-offset: 2px;
         }
 
+        .boton-control.activo {
+            animation: pulse 0.6s ease-out;
+        }
+
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 20px rgba(255, 215, 0, 0.2);
+            }
+            50% {
+                box-shadow: 0 0 60px rgba(255, 215, 0, 0.6);
+            }
+            100% {
+                box-shadow: 0 0 20px rgba(255, 215, 0, 0.2);
+            }
+        }
+
         @media (max-width: 768px) {
             .control-flotante {
                 bottom: 20px;
@@ -795,6 +830,7 @@
             animation: caerEmoji 3s linear forwards;
             pointer-events: none;
             z-index: 500;
+            filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.5));
         }
 
         @keyframes caerEmoji {
@@ -806,6 +842,43 @@
                 opacity: 0;
                 transform: translateY(100vh) rotate(360deg);
             }
+        }
+
+        /* ============================================
+           LLUVIA DE CORAZONES
+           ============================================ */
+        .corazon-lluvia {
+            position: fixed;
+            font-size: clamp(1.5rem, 3vw, 2.5rem);
+            opacity: 0;
+            animation: caerCorazon 6s ease-in forwards;
+            pointer-events: none;
+            z-index: 500;
+            filter: drop-shadow(0 0 12px rgba(255, 105, 180, 0.6));
+            text-shadow: 0 0 10px rgba(255, 105, 180, 0.8);
+        }
+
+        @keyframes caerCorazon {
+            0% {
+                opacity: 1;
+                transform: translateY(-100px) translateX(0) rotate(0deg) scale(1);
+            }
+            50% {
+                opacity: 1;
+                transform: translateY(50vh) translateX(var(--float-x, 0px)) rotate(180deg) scale(1.1);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(120vh) translateX(var(--float-x, 0px)) rotate(360deg) scale(0.8);
+            }
+        }
+
+        /* ============================================
+           EFECTO PARALLAX
+           ============================================ */
+        .parallax-element {
+            will-change: transform;
+            transition: transform 0.1s ease-out;
         }
     </style>
 </head>
@@ -896,6 +969,9 @@
         <button class="boton-control" id="btnConfeti" title="Lanzar confeti" aria-label="Lanzar confeti celebratorio">
             🎉
         </button>
+        <button class="boton-control" id="btnCorazones" title="Lluvia de corazones" aria-label="Hacer lluvia de corazones">
+            💛
+        </button>
         <button class="boton-control" id="btnCaptura" title="Capturar pantalla" aria-label="Capturar y descargar como imagen">
             📸
         </button>
@@ -925,7 +1001,7 @@
         // ============================================
         // ESTADO GLOBAL
         // ============================================
-        let estadoMusica = localStorage.getItem('imagineMusic') === 'true';
+        let estadoMusica = localStorage.getItem('imagineMusic') !== 'false'; // true por defecto
         let audioContext = null;
         let analyser = null;
         let dataArray = null;
@@ -1109,6 +1185,37 @@
         }
 
         // ============================================
+        // LLUVIA DE CORAZONES
+        // ============================================
+        function crearLluviaCorazones() {
+            crearSonido(1200, 80);
+            const btn = document.getElementById('btnCorazones');
+            
+            // Agregar efecto de pulso al botón
+            if (btn) {
+                btn.classList.add('activo');
+                setTimeout(() => btn.classList.remove('activo'), 600);
+            }
+            
+            for (let i = 0; i < 30; i++) {
+                setTimeout(() => {
+                    const corazon = document.createElement('div');
+                    corazon.className = 'corazon-lluvia';
+                    corazon.textContent = '💛';
+                    corazon.style.left = `${Math.random() * 100}vw`;
+                    corazon.style.top = '0';
+                    
+                    // Movimiento horizontal suave
+                    const floatX = random(-100, 100);
+                    corazon.style.setProperty('--float-x', `${floatX}px`);
+                    
+                    document.body.appendChild(corazon);
+                    setTimeout(() => corazon.remove(), 6000);
+                }, i * 40);
+            }
+        }
+
+        // ============================================
         // VISUALIZADOR DE MÚSICA
         // ============================================
         function inicializarVisualizador() {
@@ -1174,11 +1281,19 @@
             if (audio) {
                 audio.volume = 0.3;
                 audio.loop = true;
-                audio.play().catch(err => {
-                    console.log('No se pudo reproducir:', err);
-                    estadoMusica = false;
-                    document.getElementById('btnMusica').style.opacity = '0.6';
-                });
+                const playPromise = audio.play();
+                
+                if (playPromise !== undefined) {
+                    playPromise.catch(err => {
+                        // Los navegadores no permiten autoplay, esperar a interacción del usuario
+                        console.log('Autoplay bloqueado, esperando interacción del usuario');
+                        const iniciarMusica = () => {
+                            audio.play().catch(() => {});
+                            document.removeEventListener('click', iniciarMusica);
+                        };
+                        document.addEventListener('click', iniciarMusica);
+                    });
+                }
                 
                 document.getElementById('visualizador').classList.add('activo');
                 if (!analyser) inicializarVisualizador();
@@ -1231,6 +1346,44 @@
         }
 
         // ============================================
+        // EFECTO PARALLAX
+        // ============================================
+        function inicializarParallax() {
+            const universoContainer = document.querySelector('.universo-container');
+            const seccionCentral = document.querySelector('.seccion-central');
+            
+            if (!universoContainer) return;
+            
+            document.addEventListener('mousemove', (e) => {
+                // Calcular la posición relativa del mouse respecto al centro
+                const rect = seccionCentral.getBoundingClientRect();
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                
+                const mouseX = e.clientX - rect.left;
+                const mouseY = e.clientY - rect.top;
+                
+                const distanceX = (mouseX - centerX) / centerX;
+                const distanceY = (mouseY - centerY) / centerY;
+                
+                // Aplicar transformación 3D
+                const rotateX = distanceY * 15; // Hasta 15 grados
+                const rotateY = -distanceX * 15;
+                
+                universoContainer.style.transform = `
+                    perspective(1000px)
+                    rotateX(${rotateX}deg)
+                    rotateY(${rotateY}deg)
+                `;
+            });
+            
+            // Restaurar posición cuando sale el mouse
+            document.addEventListener('mouseleave', () => {
+                universoContainer.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg)';
+            });
+        }
+
+        // ============================================
         // EVENTOS
         // ============================================
         document.addEventListener('click', (e) => {
@@ -1241,6 +1394,7 @@
 
         document.getElementById('btnMusica').addEventListener('click', toggleMusica);
         document.getElementById('btnConfeti').addEventListener('click', crearConfeti);
+        document.getElementById('btnCorazones').addEventListener('click', crearLluviaCorazones);
         document.getElementById('btnCaptura').addEventListener('click', capturarPantalla);
 
         // ============================================
@@ -1258,6 +1412,9 @@
 
             // Primera estrella fugaz después de 5 segundos
             setTimeout(crearEstrellaFugaz, 5000);
+
+            // Inicializar efecto parallax
+            inicializarParallax();
 
             // Restaurar estado de música
             if (estadoMusica) {
